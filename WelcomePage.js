@@ -74,7 +74,7 @@ function WelcomePage() {
 
             <ButtonComp
                 onPress={getId}
-                title={"Skapa Id"}
+                title={"Skapa Id snälla"}
                 style={styles.cancelButton}
             />
             <Text>
