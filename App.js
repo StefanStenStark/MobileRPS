@@ -1,8 +1,8 @@
-import WelcomePage from "./WelcomePage";
+import StackNav from "./StackNav";
 
 
 export default function App() {
   return (
-      <WelcomePage/>
+      <StackNav/>
   );
 }

@@ -8,6 +8,7 @@ function WelcomePage() {
     const [players, setPlayers] = useState([])
     const [data, setData] = useState([]);
     const [nameOfPlayer, setNameOfPlayer] = useState("Stefkalo")
+
     const getId = async () => {
         try {
             const response = await fetch('http://localhost:8080/rock-paper-scissors/auth/token');
