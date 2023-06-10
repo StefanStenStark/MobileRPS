@@ -65,8 +65,6 @@ function PlayPage({navigation, route}) {
                     style={styles.button}
                 />
                 </View>
-
-
                 <View style={styles.bodyMid}>
                     <Image
                         style={styles.stretch}
@@ -78,7 +76,6 @@ function PlayPage({navigation, route}) {
                         style={styles.button}
                     />
                 </View>
-
                 <View style={styles.bodyBot}>
                     <Image
                         style={styles.stretch}

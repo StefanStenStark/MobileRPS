@@ -7,28 +7,25 @@ function LorePage({navigation}) {
     const goToWelcomePage = () => {
         navigation.navigate("WelcomeRPS")
     }
+    return (
+        <View style={styles.body}>
+            <Text style={styles.text}>
+                Rock Paper Scissors is considered the oldest hand game in the world.
 
-
-    return(
-
-                <View style={styles.body}>
-                    <Text style={styles.text}>
-                        Rock Paper Scissors is considered the oldest hand game in the world.
-
-                    </Text>
-                    <Text style={styles.text}>
-                        In fact, the game dates all the way back to the Chinese Han Dynasty.
-                        This era began in 206 BC and ended in 220 AD.
-                    </Text>
-                    <Text style={styles.text}>
-                        There are also accounts of this game in Japanese history.
-                    </Text>
-                    <ButtonComp
-                        onPress={goToWelcomePage}
-                        title={"ok"}
-                        style={styles.button}
-                    />
-                </View>
+            </Text>
+            <Text style={styles.text}>
+                In fact, the game dates all the way back to the Chinese Han Dynasty.
+                This era began in 206 BC and ended in 220 AD.
+            </Text>
+            <Text style={styles.text}>
+                There are also accounts of this game in Japanese history.
+            </Text>
+            <ButtonComp
+                onPress={goToWelcomePage}
+                title={"ok"}
+                style={styles.button}
+            />
+        </View>
     )
 }
 
