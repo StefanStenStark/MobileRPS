@@ -11,11 +11,9 @@ function WelcomeRPS({navigation}) {
     const goToLorePage = () => {
         navigation.navigate("LorePage")
     }
-
     const goToNamePage = () => {
         navigation.navigate("NamePage")
     }
-
     return(
         <View style={styles.body}>
             <Text style={styles.textWelcome}>

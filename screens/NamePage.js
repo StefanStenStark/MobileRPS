@@ -9,12 +9,9 @@ function NamePage({navigation}) {
     const [nameOfPlayer, setNameOfPlayer] = useState("Stefkalo")
     const [playerId, setPlayerId] = useState("")
 
-
-
     useEffect (() => {
         getId();
     }, []);
-
     const getId = async () => {
         try {
             const response = await fetch('http://192.168.1.142:8080/rock-paper-scissors/auth/token');
@@ -25,7 +22,6 @@ function NamePage({navigation}) {
         }
 
     };
-
     const createPlayer = async () => {
         try {
             await fetch("http://192.168.1.142:8080/rock-paper-scissors/user/name", {
@@ -41,7 +37,6 @@ function NamePage({navigation}) {
         }
             navigation.navigate("PickGamePage", {id: playerId})
     };
-
     return(
             <View style={styles.body}>
 
@@ -89,7 +84,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 20
     }
-
 });
 
 export default NamePage

@@ -15,12 +15,9 @@ function PickGamePage({navigation, route}) {
         showGames();
     }, []);
 
-
-
     const saveGameId = async (gameId) => {
             navigation.navigate("PLayPage", {playerGameIdSend: gameId, playerIdSend: playerId })
     }
-
     const showGames = () => {
         fetch("http://192.168.1.142:8080/rock-paper-scissors/games", {
             method: "GET"
@@ -30,7 +27,6 @@ function PickGamePage({navigation, route}) {
 
         })
     }
-
     const joinGame =  async (theGameId) => {
             const res = await fetch("http://192.168.1.142:8080/rock-paper-scissors/games/join/" + theGameId, {
                 method: "GET",
@@ -42,7 +38,6 @@ function PickGamePage({navigation, route}) {
         const data = await res.json();
         await saveGameId(data.id)
     }
-
     const createGame  = async () => {
             const res = await fetch("http://192.168.1.142:8080/rock-paper-scissors/games/start", {
                 method: "POST",
@@ -54,8 +49,6 @@ function PickGamePage({navigation, route}) {
         const data = await res.json();
         await saveGameId(data.id)
     };
-
-
     return (
         <View style={styles.body}>
             <ButtonComp
@@ -88,7 +81,6 @@ function PickGamePage({navigation, route}) {
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     body: {
         flex: 1,

@@ -10,7 +10,6 @@ function PlayPage({navigation, route}) {
     const [playerId, setPlayerId] = useState("")
     const [playerGameId, setPlayerGameId] = useState("")
 
-
     useEffect(() => {
                 setPlayerId(playerIdSend);
                 setPlayerGameId(playerGameIdSend);
@@ -53,7 +52,6 @@ function PlayPage({navigation, route}) {
         navigation.navigate("ResultsPage", {sendGameIdToResult: playerGameId, sendPlayerIdToResult: playerId})
     }
     return(
-
             <View style={styles.body}>
 
                 <View style={styles.bodyTop}>
@@ -65,7 +63,6 @@ function PlayPage({navigation, route}) {
                     onPress={Stone}
                     title={"Rock"}
                     style={styles.button}
-
                 />
                 </View>
 

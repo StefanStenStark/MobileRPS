@@ -17,7 +17,6 @@ function ButtonComp({onPress,color,style,title}) {
 ButtonComp.defaultProps = {
     color: "#e1cd4a"
 }
-
 const styles = StyleSheet.create({
     buttonText: {
         color: "rgba(48,73,114,0.87)",

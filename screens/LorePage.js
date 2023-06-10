@@ -12,9 +12,6 @@ function LorePage({navigation}) {
     return(
 
                 <View style={styles.body}>
-
-
-
                     <Text style={styles.text}>
                         Rock Paper Scissors is considered the oldest hand game in the world.
 
@@ -26,13 +23,11 @@ function LorePage({navigation}) {
                     <Text style={styles.text}>
                         There are also accounts of this game in Japanese history.
                     </Text>
-
                     <ButtonComp
                         onPress={goToWelcomePage}
                         title={"ok"}
                         style={styles.button}
                     />
-
                 </View>
     )
 }

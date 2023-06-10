@@ -14,14 +14,11 @@ function ResultsPage({navigation, route}) {
     const [playerGameId, setPlayerGameId] = useState("")
     const [haveAResult, setHaveAResult] = useState(false)
     const interval = setInterval(updateGameStatus, 500);
-
-
     useEffect(() => {
         setPlayerId(sendPlayerIdToResult);
         setPlayerGameId(sendGameIdToResult);
         setHaveAResult(true)
     }, []);
-
     const goToWelcomePage = () => {
         if (resultForButton === "Play again" || resultForButton === "Do not want to wait." ){
             navigation.navigate("PickGamePage", {id: playerId})
@@ -37,15 +34,11 @@ function ResultsPage({navigation, route}) {
             if (waitingTime >= 3){
                 setResultForButton("Do not want to wait.")
             }
-
-
         }
     }
-
     function updateGameStatus(){
         if(haveAResult){
             setResult("Waiting for opponent..")
-
                 fetch("http://192.168.1.142:8080/rock-paper-scissors/games/" + playerGameId,
                     {
                         method: 'GET',
@@ -56,7 +49,6 @@ function ResultsPage({navigation, route}) {
                     })
                 .then(response => response.json())
                 .then(game => {
-
                     if (game.move !== null){
                         if (game.opponentMove !== null){
                             if (game.move === game.opponentMove) {
@@ -80,13 +72,10 @@ function ResultsPage({navigation, route}) {
                     }
                 })
         }
-
         if (result === "Win" ||result === "Lose" || result === "Draw" ){
             setResultForButton("Play again")
         }
-
     }
-
     return(
                 <View style={styles.body}>
                     <Text style={styles.text}>{result}</Text>
