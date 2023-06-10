@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 function ResultsPage({navigation, route}) {
 
     const {sendGameIdToResult, sendPlayerIdToResult} = route.params;
-
     const [result, setResult] = useState("")
     const [waitingTime, setWaitingTime] = useState(1)
     const [resultForButton, setResultForButton] = useState("Waiting")
