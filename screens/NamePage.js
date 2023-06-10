@@ -8,7 +8,6 @@ function NamePage({navigation}) {
 
     const [nameOfPlayer, setNameOfPlayer] = useState("Stefkalo")
     const [playerId, setPlayerId] = useState("")
-
     useEffect (() => {
         getId();
     }, []);

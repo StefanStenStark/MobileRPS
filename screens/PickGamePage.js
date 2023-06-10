@@ -8,8 +8,6 @@ function PickGamePage({navigation, route}) {
     const {id} = route.params;
     const [playerId, setPlayerId] = useState("")
     const [players, setPlayers] = useState([])
-
-
     useEffect (() => {
         setPlayerId(id)
         showGames();
@@ -110,7 +108,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 20
     }
-
 });
 
 export default PickGamePage
