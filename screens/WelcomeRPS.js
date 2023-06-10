@@ -18,8 +18,8 @@ function WelcomeRPS({navigation}) {
 
     return(
         <View style={styles.body}>
-            <Text style={styles.text}>
-                Startsidan
+            <Text style={styles.textWelcome}>
+                Rock, Paper, Scissor
             </Text>
             <ButtonComp
                 onPress={goToNamePage}
@@ -49,23 +49,16 @@ const styles = StyleSheet.create({
         padding: 30
     },
     text: {
-        color: "white",
+        color: "rgba(48,73,114,0.87)",
         fontWeight: "bold",
         fontSize: 30
     },
-    buttonText: {
-        color: "white",
-        fontSize: 20
+    textWelcome: {
+        color: "#fff",
+        fontWeight: "bold",
+        fontSize: 30
     },
-    button: {
-        width: 200,
-        height: 50,
-        padding: 10,
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 20,
-        marginTop: 20
-    },
+
 });
 
 export default WelcomeRPS

@@ -13,13 +13,26 @@ function LorePage({navigation}) {
 
                 <View style={styles.body}>
 
-                    <Text style={styles.text}>LorePage</Text>
+
+
+                    <Text style={styles.text}>
+                        Rock Paper Scissors is considered the oldest hand game in the world.
+
+                    </Text>
+                    <Text style={styles.text}>
+                        In fact, the game dates all the way back to the Chinese Han Dynasty.
+                        This era began in 206 BC and ended in 220 AD.
+                    </Text>
+                    <Text style={styles.text}>
+                        There are also accounts of this game in Japanese history.
+                    </Text>
 
                     <ButtonComp
                         onPress={goToWelcomePage}
                         title={"ok"}
                         style={styles.button}
                     />
+
                 </View>
     )
 }
@@ -27,33 +40,16 @@ function LorePage({navigation}) {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: 'rgba(61,13,84,0.87)',
+        backgroundColor: 'rgba(48,73,114,0.87)',
         alignItems: "center",
         justifyContent: "center",
         padding: 30
     },
     text: {
         color: "white",
-        fontWeight: "bold",
-        fontSize: 30
-    },
-    input: {
-        backgroundColor: "white",
-        borderWidth: 1,
-        borderColor: "#3f0528",
-        margin: 10,
-        padding: 10,
-    },
-    cancelButton: {
-        borderWidth: 1,
-        borderColor: "#3f0528",
-        width: 200,
-        height: 50,
-        padding: 10,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 20
-    },
+        fontSize: 18,
+        alignItems: "center"
+    }
 });
 
 export default LorePage

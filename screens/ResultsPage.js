@@ -1,77 +1,78 @@
 import {StyleSheet, Text, View} from "react-native";
 import ButtonComp from "../components/ButtonComp";
 import {useEffect, useState} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {gameInfoUpdate} from "../Fetches";
 
 
-function ResultsPage({navigation}) {
+function ResultsPage({navigation, route}) {
 
-    const [winOrLose, setWinOrLose] = useState(false)
+    const {sendGameIdToResult, sendPlayerIdToResult} = route.params;
+
+    const [result, setResult] = useState("")
+    const [waitingTime, setWaitingTime] = useState(1)
+    const [resultForButton, setResultForButton] = useState("Waiting")
     const [playerId, setPlayerId] = useState("")
     const [playerGameId, setPlayerGameId] = useState("")
+    const [haveAResult, setHaveAResult] = useState(false)
+    const interval = setInterval(updateGameStatus, 500);
+
 
     useEffect(() => {
-        try {
-            AsyncStorage.getItem("TheKey")
-                .then(value => {
-                    setPlayerId(value);
-                    console.log(playerId)
-                })
-        } catch (error) {
-            console.log(error)
-        }
+        setPlayerId(sendPlayerIdToResult);
+        setPlayerGameId(sendGameIdToResult);
+        setHaveAResult(true)
     }, []);
-
-    useEffect(() => {
-        try {
-            AsyncStorage.getItem("TheKey")
-                .then(value => {
-                    setPlayerGameId(value);
-                    console.log(playerGameId)
-                })
-        } catch (error) {
-            console.log(error)
-        }
-    }, []);
-
 
     const goToWelcomePage = () => {
-        navigation.navigate("WelcomeRPS")
+        if (resultForButton === "Play again" || resultForButton === "Do not want to wait." ){
+            navigation.navigate("PickGamePage", {id: playerId})
+        }else{
+            if (waitingTime === 1){
+                setResultForButton("Still waiting..")
+                setWaitingTime(waitingTime + 1)
+            }
+            else if (waitingTime === 2){
+                setResultForButton("Waiting still.")
+                setWaitingTime(waitingTime + 1)
+            }
+            if (waitingTime >= 3){
+                setResultForButton("Do not want to wait.")
+            }
+
+
+        }
     }
 
     function updateGameStatus(){
-        if(winOrLose){
-            console.log(winOrLose)
-            gameInfoUpdate(playerId, playerGameId)
+        if(haveAResult){
+            setResult("Waiting for opponent..")
+
+                fetch("http://192.168.1.142:8080/rock-paper-scissors/games/" + playerGameId,
+                    {
+                        method: 'GET',
+                        headers: {
+                            token: playerId,
+                            "Content-Type": "application/json"
+                        },
+                    })
                 .then(response => response.json())
                 .then(game => {
 
                     if (game.move !== null){
                         if (game.opponentMove !== null){
                             if (game.move === game.opponentMove) {
-                                console.log("Draw")
-                                setWinOrLose(false)
-                                setShowWaitingForMove(false)
-                                setShowDraw(true)
+                                setResult("Draw")
                                 clearInterval(interval)
-
+                                setHaveAResult(false)
                             }
                             else if ((game.move === "ROCK" && game.opponentMove === "PAPER") || (game.move === "PAPER" && game.opponentMove === "SCISSORS") || (game.move === "SCISSORS" && game.opponentMove === "ROCK")) {
-                                console.log("Lose!!")
-                                setWinOrLose(false)
-                                setShowWaitingForMove(false)
-                                setShowLose(true)
+                                setResult("Lose")
                                 clearInterval(interval)
-
+                                setHaveAResult(false)
                             }
                             else {
-                                console.log("Win!!")
-                                setWinOrLose(false)
-                                setShowWaitingForMove(false)
-                                setShowWin(true)
+                                setResult("Win")
                                 clearInterval(interval)
-
+                                setHaveAResult(false)
                             }
                         }
                     }else if (game.opponentName !== null) {
@@ -80,18 +81,18 @@ function ResultsPage({navigation}) {
                 })
         }
 
+        if (result === "Win" ||result === "Lose" || result === "Draw" ){
+            setResultForButton("Play again")
+        }
+
     }
 
-
     return(
-
                 <View style={styles.body}>
-
-                    <Text style={styles.text}>ResultsPage</Text>
-
+                    <Text style={styles.text}>{result}</Text>
                     <ButtonComp
                         onPress={goToWelcomePage}
-                        title={"ok"}
+                        title={resultForButton}
                         style={styles.button}
                     />
                 </View>
@@ -101,32 +102,16 @@ function ResultsPage({navigation}) {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: 'rgba(61,13,84,0.87)',
+        backgroundColor: 'rgba(48,73,114,0.87)',
         alignItems: "center",
         justifyContent: "center",
         padding: 30
     },
     text: {
-        color: "white",
+        color: "rgba(48,73,114,0.87)",
         fontWeight: "bold",
-        fontSize: 30
-    },
-    input: {
-        backgroundColor: "white",
-        borderWidth: 1,
-        borderColor: "#3f0528",
-        margin: 10,
-        padding: 10,
-    },
-    cancelButton: {
-        borderWidth: 1,
-        borderColor: "#3f0528",
-        width: 200,
-        height: 50,
-        padding: 10,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 20
+        fontSize: 30,
+        textAlign: "center"
     },
 });
 

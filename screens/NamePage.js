@@ -2,50 +2,36 @@ import {Text, TextInput, View} from "react-native";
 import {StyleSheet} from "react-native";
 import ButtonComp from "../components/ButtonComp";
 import {useEffect, useState} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function NamePage({navigation}) {
 
     const [nameOfPlayer, setNameOfPlayer] = useState("Stefkalo")
-    const [data, setData] = useState([]);
+    const [playerId, setPlayerId] = useState("")
 
 
-    const save = async () => {
-        try {
-            await AsyncStorage.setItem('TheKey',data.toString() )
-            console.log("Itworkided")
-            navigation.navigate("PickGamePage")
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
-
-    useEffect(() => {
-        try {
-            getId();
-        } catch (error) {
-            console.log(error)
-        }
+    useEffect (() => {
+        getId();
     }, []);
 
     const getId = async () => {
         try {
-            const response = await fetch('http://localhost:8080/rock-paper-scissors/auth/token');
+            const response = await fetch('http://192.168.1.142:8080/rock-paper-scissors/auth/token');
             const json = await response.json();
-            setData(json);
+            await setPlayerId(json);
         } catch (error) {
             console.error(error);
         }
+
     };
 
     const createPlayer = async () => {
         try {
-            await fetch("http://localhost:8080/rock-paper-scissors/user/name", {
+            await fetch("http://192.168.1.142:8080/rock-paper-scissors/user/name", {
                 method: "POST",
                 headers: {
-                    token: data,
+                    token: playerId,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({name: nameOfPlayer})
@@ -53,16 +39,13 @@ function NamePage({navigation}) {
         } catch (error) {
             console.error(error);
         }
-        await save();
+            navigation.navigate("PickGamePage", {id: playerId})
     };
 
     return(
-
             <View style={styles.body}>
 
-                <Text style={styles.text}>Name page</Text>
-                <Text style={styles.text}>{data}</Text>
-
+                <Text style={styles.text}>Name please</Text>
                 <TextInput
                     placeholder={""}
                     style={styles.input}
@@ -70,16 +53,10 @@ function NamePage({navigation}) {
 
                 <ButtonComp
                     onPress={createPlayer}
-                    title={"create player"}
+                    title={"Select name"}
                     style={styles.button}
                 />
-
-
             </View>
-
-
-
-
     )
 }
 
@@ -98,6 +75,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: "white",
+        width: 200,
         borderWidth: 1,
         borderColor: "#3f0528",
         margin: 10,

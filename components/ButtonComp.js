@@ -4,7 +4,7 @@ function ButtonComp({onPress,color,style,title}) {
     return <Pressable
         onPress={onPress}
         style={({pressed}) => [
-            {backgroundColor: pressed ? "#831477" : color},
+            {backgroundColor: pressed ? "#ffe7af" : color},
             styles.button,
             {...style}
         ]}
@@ -15,12 +15,13 @@ function ButtonComp({onPress,color,style,title}) {
     </Pressable>;
 }
 ButtonComp.defaultProps = {
-    color: "#d0bacd"
+    color: "#e1cd4a"
 }
 
 const styles = StyleSheet.create({
     buttonText: {
-        color: "white",
+        color: "rgba(48,73,114,0.87)",
+        fontWeight: "bold",
         fontSize: 20
     },
     button: {
@@ -30,6 +31,9 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: "center",
         justifyContent: "center",
+        borderTopRightRadius: 35,
+        borderTopLeftRadius: 3,
+        borderBottomLeftRadius: 20,
         marginTop: 20
     },
 });

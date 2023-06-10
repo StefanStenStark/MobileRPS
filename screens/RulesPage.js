@@ -13,7 +13,26 @@ function RulesPage({navigation}) {
 
             <View style={styles.body}>
 
-                <Text style={styles.text}>Rules page</Text>
+
+
+                <Text style={styles.text}>
+                    Despite its underlying complexity, the game’s rules are straightforward.
+                </Text>
+                <Text style={styles.text}>
+                    Players deliver hand signals representing rock, paper, or scissors,
+                    with the outcome determined by these three rules:
+                </Text>
+                <Text style={styles.text}>
+                    Rock wins against scissors.
+                </Text>
+                <Text style={styles.text}>
+                    Scissors win against paper.
+                </Text>
+                <Text style={styles.text}>
+
+                    Paper wins against rock.
+                </Text>
+
                 <ButtonComp
                     onPress={goToWelcomePage}
                     title={"ok"}
@@ -35,15 +54,8 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "white",
-        fontWeight: "bold",
-        fontSize: 30
-    },
-    input: {
-        backgroundColor: "white",
-        borderWidth: 1,
-        borderColor: "#3f0528",
-        margin: 10,
-        padding: 10,
+        fontSize: 18,
+        alignItems: "center"
     },
     button: {
         width: 200,
